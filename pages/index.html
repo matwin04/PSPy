@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PSP Video Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload Video</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="video" required>
+        <input type="submit" value="Upload">
+    </form>
+
+    <h2>Available Videos</h2>
+    <table>
+        <tr>
+            <th>Original Filename</th>
+            <th>Download</th>
+            <th>Upload Date</th>
+        </tr>
+        % for video in videos:
+        <tr>
+            <td>{{ video['original_filename'] }}</td>
+            <td><a href="/videos/{{ video['filename'] }}">Download</a></td>
+            <td>{{ video['upload_date'] }}</td>
+        </tr>
+        % end
+    </table>
+
+    <p>Access from PSP Browser: <strong>http://{{ip}}:8080/</strong></p>
+</body>
+</html>
